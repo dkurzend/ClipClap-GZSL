@@ -1,0 +1,76 @@
+# dataset settings
+dataset_name: UCF
+feature_extraction_method: cls_features_non_averaged
+input_size_audio: 128
+input_size_video: 4096
+zero_shot_split: cls_split
+selavi: False
+
+# training
+batch_seqlen_test: max
+batch_seqlen_test_maxlen: 300
+batch_seqlen_test_trim: center
+batch_seqlen_train: max
+batch_seqlen_train_maxlen: 60
+batch_seqlen_train_trim: random
+bs: 64
+epochs: 50
+eval_bs: 64
+lr: 7.0e-05
+lr_scheduler: true
+n_batches: 300
+eval_num_workers: 8
+optimizer: adam
+data_parallel: false
+best_model_criterion: score   # 'loss' or 'score'
+
+# loss functions
+rec_loss: true # reconstruction loss
+reg_loss: true # regression loss
+cross_entropy_loss: true # cross entropy loss
+
+# general
+debug: false
+debug_comment: ''
+distance_fn: L2Loss
+seed: 42
+verbose: false
+new_model_sequence: true
+eval_name: Attention
+
+# model
+decoder_dropout: 0.1 # dropout for output embedding layers O_proj and D_o
+decoder_hidden_size: 512 # hidden size of O_proj and D_o
+additional_dropout: 0.1  # dropout for word label embedding layers W_proj and D_w
+embeddings_batch_norm: true # batch norm for all embedding layers (O_proj, D_o, audio_enc, video_enc, W_proj, D_w)
+
+transformer_dim: 300
+transformer_depth: 3
+transformer_dropout: 0.3
+transformer_embedding_dim: 64
+transformer_embedding_dropout: 0.2
+transformer_embedding_modality: True
+transformer_heads: 4
+transformer_mlp_dim: 1024
+
+
+# old
+embedding_dropout: 0.3  # dropout for video and audio encoder block
+embeddings_hidden_size: 512 # hidden size of audio and video encoder block
+
+
+
+
+
+transformer_dim_head: 64
+
+transformer_embedding_fourier_scale: 10.0
+
+transformer_embedding_time_embed_type: sinusoid
+transformer_embedding_time_len: 120
+
+
+transformer_use_class_token: True
+transformer_use_embedding_net: true
+use_cross_attention: true
+use_self_attention: false
