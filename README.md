@@ -1,5 +1,12 @@
 # Audio-Visual Generalized Zero-Shot Learning using Large Pre-Trained Models
 
+<!-- ## [Paper](https://arxiv.org/abs/2207.09966) | [Project Page](https://www.eml-unitue.de/publication/temporal-audio-visual-zsl)
+
+
+This repository is the implementation of [Temporal and cross-modal attention for
+audio-visual zero-shot learning](https://arxiv.org/abs/2207.09966). -->
+
+<img src="audio_visual_gzsl.png" width="700" height="400">
 
 ## Requirements
 Install all required dependencies into a new virtual environment via conda.
@@ -9,7 +16,7 @@ conda activate clipclap
 ```
 
 
-## Download features
+## Download Features
 
 You can download the CLIP and CLAP features of all three datasets here:
 <!-- * [data (CLIP/CLAP)](https://drive.google.com/file/d/1fNb3WvbN76yuPVi4MeVtgDycdX0jAE2G/view?usp=sharing) -->
@@ -47,7 +54,7 @@ Run training for UCF-GZSL :
 nohup python3 main.py --cfg config/clipclap.yaml \
                         --device cuda:6 \
                         --root_dir /path/to/UCF  \
-                        --log_dir /logs/ClipClap_UCF \
+                        --log_dir logs/ClipClap_UCF \
                         --dataset_name UCF \
                         --epochs 20 \
                         --lr 0.00007 \
@@ -61,7 +68,7 @@ Run training for ActivityNet-GZSL :
 nohup python3 main.py --cfg config/clipclap.yaml \
                         --device cuda:6 \
                         --root_dir /path/to/ActivityNet  \
-                        --log_dir /logs/ClipClap_ActivityNet \
+                        --log_dir logs/ClipClap_ActivityNet \
                         --dataset_name ActivityNet \
                         --epochs 15 \
                         --lr 0.0001 \
@@ -76,7 +83,7 @@ Run training for VGGSound-GZSL :
 nohup python3 main.py --cfg config/clipclap.yaml \
                         --device cuda:5 \
                         --root_dir /path/to/VGGSound  \
-                        --log_dir /logs/ClipClap_VGGSound \
+                        --log_dir logs/ClipClap_VGGSound \
                         --dataset_name VGGSound \
                         --epochs 15 \
                         --lr 0.0001 \
@@ -128,6 +135,56 @@ arguments:
 | Hyper-multiple     |   8.47                  |  40.28          |  22.18            |
 | **Proposed**       |  **11.53**              |  **46.96**      |  **22.76**       |
 
+
+
+
+
+# Extracting Features from Scratch
+
+Install all required dependencies into a new virtual environment via conda.
+```shell
+conda env create -f clipclap_feature_extraction.yml
+conda activate clipclap_feature_extraction
+```
+
+Place the model weights from WavCaps in the following directories:
+```
+WavCaps/retrieval/pretrained_models/audio_encoders/HTSAT_BERT_zero_shot.pt
+WavCaps/retrieval/pretrained_models/audio_encoders/HTSAT.ckpt
+```
+The files can be downloaded from the [WavCaps repository](https://github.com/XinhaoMei/WavCaps).
+
+In order to extract the CLIP/CLAP features on your own, run the scripts in the ```/clip_feature_extraction``` as follows:
+```shell
+python3 clip_feature_extraction/get_clip_features_activitynet.py
+python3 clip_feature_extraction/get_clip_features_ucf.py
+python3 clip_feature_extraction/get_clip_features_vggsound.py
+```
+Given the files extracted by the above scripts, run the following command to obtain the CLIP/CLAP features:
+
+```shell
+python3 splitting_scripts_cls/create_pkl_files_cls.py --dataset_name DATASET_NAME --path_original_dataset PATH_ORIGINAL_DATASET --path_splitted_dataset PATH_SPLITTED_DATASET
+
+arguments:
+--dataset_name: Name of the dataset
+--path_original_dataset: the path of the dataset where the above scripts (those in ```cls_feature_extraction```) have extracted the dataset
+--path_splitted_dataset: the path where to put the dataset after it is processed in the right way.
+```
+
+
+To obtain the class embeddings, run folloing scripts:
+```shell
+python3 clip_embeddings_extraction/get_clip_embeddings_activitynet.py
+python3 clip_embeddings_extraction/get_clip_embeddings_ucf.py
+python3 clip_embeddings_extraction/get_clip_embeddings_vggsound.py
+```
+
+# Project structure
+```src``` - Contains the code used throughout the project for dataloaders/models/training/testing.
+```WavCaps``` - Folder contains the code for the CLAP network.
+```clip_feature_extraction``` - Contains the code used to extract the CLIP/CLAP features from all 3 datasets.
+```clip_embeddings_extraction``` - Contains the code used to extract the CLIP and CLAP class embeddings from all 3 datasets.
+```splitting_scripts_cls``` - Contains files from spltting our dataset into the required structure.
 
 <!-- ## [Paper](https://arxiv.org/abs/2207.09966) | [Project Page](https://www.eml-unitue.de/publication/temporal-audio-visual-zsl)
 
