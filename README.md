@@ -5,6 +5,7 @@
 Install all required dependencies into a new virtual environment via conda.
 ```shell
 conda env create -f clipclap.yml
+conda activate clipclap
 ```
 
 
