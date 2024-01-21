@@ -1,4 +1,133 @@
 # Audio-Visual Generalized Zero-Shot Learning using Large Pre-Trained Models
+
+
+## Requirements
+Install all required dependencies into a new virtual environment via conda.
+```shell
+conda env create -f clipclap.yml
+```
+
+
+## Download features
+
+You can download the CLIP and CLAP features of all three datasets here:
+<!-- * [data (CLIP/CLAP)](https://drive.google.com/file/d/1fNb3WvbN76yuPVi4MeVtgDycdX0jAE2G/view?usp=sharing) -->
+* [data (CLIP/CLAP)](https://drive.google.com/uc?export=download&id=1fNb3WvbN76yuPVi4MeVtgDycdX0jAE2G)
+
+
+
+
+
+
+It does not matter where the features are stored, but the path has to be specified in the --root_dir option when running the training.
+
+
+```shell
+unzip data.zip
+```
+
+
+# Training
+In order to train the model run the following command:
+```python3 main.py --cfg CFG_FILE  --root_dir ROOT_DIR --log_dir LOG_DIR --dataset_name DATASET_NAME --run all```
+
+```
+arguments:
+--cfg CFG_FILE is the file containing all the hyperparameters for the experiments. To replicate our results, use ```--cfg config/clipclap.yaml``` for all three datasets.
+--root_dir ROOT_DIR indicates the location where the dataset is stored.
+--dataset_name {VGGSound, UCF, ActivityNet} indicate the name of the dataset.
+--log_dir LOG_DIR indicates where to save the experiments.
+--run {'all', 'stage-1', 'stage-2'}. 'all' indicates to run both training stages + evaluation, whereas 'stage-1', 'stage-2' indicates to run only those particular training stages
+```
+Example commands can be also found in `commands.sh`.
+
+Run training for UCF-GZSL :
+```python
+nohup python3 main.py --cfg config/clipclap.yaml \
+                        --device cuda:6 \
+                        --root_dir /path/to/UCF  \
+                        --log_dir /logs/ClipClap_UCF \
+                        --dataset_name UCF \
+                        --epochs 20 \
+                        --lr 0.00007 \
+                        --use_wavcaps_embeddings True \
+                        --modality both  \
+                        --word_embeddings both   \
+                        --run all > logs/ClipClap_UCF.log &
+```
+Run training for ActivityNet-GZSL :
+```python
+nohup python3 main.py --cfg config/clipclap.yaml \
+                        --device cuda:6 \
+                        --root_dir /path/to/ActivityNet  \
+                        --log_dir /logs/ClipClap_ActivityNet \
+                        --dataset_name ActivityNet \
+                        --epochs 15 \
+                        --lr 0.0001 \
+                        --use_wavcaps_embeddings True \
+                        --modality both  \
+                        --word_embeddings both   \
+                        --run all > logs/ClipClap_ActivityNet.log &
+```
+
+Run training for VGGSound-GZSL :
+```python
+nohup python3 main.py --cfg config/clipclap.yaml \
+                        --device cuda:5 \
+                        --root_dir /path/to/VGGSound  \
+                        --log_dir /logs/ClipClap_VGGSound \
+                        --dataset_name VGGSound \
+                        --epochs 15 \
+                        --lr 0.0001 \
+                        --use_wavcaps_embeddings True \
+                        --modality both  \
+                        --word_embeddings both   \
+                        --run all > logs/ClipClap_VGGSound.log &
+
+```
+
+# Evaluation
+
+Evaluation can be done in two ways. Either you train with ```--run all``` which means that after training the evaluation will be done automatically, or you can do it manually.
+
+For manual evaluation run the following command:
+
+```python3 get_evaluation.py --cfg CFG_FILE --load_path_stage_A PATH_STAGE_A --load_path_stage_B PATH_STAGE_B --dataset_name DATASET_NAME --root_dir ROOT_DIR```
+
+```
+arguments:
+--cfg CFG_FILE is the file containing all the hyperparameters for the experiments. To replicate our results, use ```--cfg config/clipclap.yaml``` for all three datasets.
+--load_path_stage_A will indicate to the path that contains the network for stage 1
+--load_path_stage_B will indicate to the path that contains the network for stage 2
+--dataset_name {VGGSound, UCF, ActivityNet} will indicate the name of the dataset
+--root_dir points to the location where the dataset is stored
+```
+
+
+# Results
+
+### GZSL performance on VGGSound-GZSL, UCF-GZSL, ActivityNet-GZSL
+
+| Method             | VGGSound-GZSL          | UCF-GZSL        | ActivityNet-GZSL |
+|--------------------|------------------------|-----------------|------------------|
+| CJME               |   7.45                 |    25.87        |   11.64           |
+| AVGZSLNET          |   4.71                 |     42.67       |   12.70           |
+| AVCA               |   11.26                  |  36.69          |  21.76            |
+| Hyper-multiple     |   11.87                  |  41.56          |  20.90            |
+| **Proposed**       |  **16.18**              |  **55.97**      |  **27.93**       |
+
+
+### ZSL performance on VGGSound-GZSL, UCF-GZSL, ActivityNet-GZSL
+
+| Method             | VGGSound-GZSL          | UCF-GZSL        | ActivityNet-GZSL |
+|--------------------|------------------------|-----------------|------------------|
+| CJME               |    6.84                 |    20.46        |   9.92           |
+| AVGZSLNET          |    5.44                 |      35.66       |    12.39           |
+| AVCA               |   8.16                  |  38.67          |  20.88            |
+| Hyper-multiple     |   8.47                  |  40.28          |  22.18            |
+| **Proposed**       |  **11.53**              |  **46.96**      |  **22.76**       |
+
+
 <!-- ## [Paper](https://arxiv.org/abs/2207.09966) | [Project Page](https://www.eml-unitue.de/publication/temporal-audio-visual-zsl)
 
 
@@ -96,6 +225,7 @@ arguments:
 --log_dir LOG_DIR indicates where to save the experiments.
 --run {'all', 'stage-1', 'stage-2'}. 'all' indicates to run both training stages + evaluation, whereas 'stage-1', 'stage-2' indicates to run only those particular training stages
 ```
+
 
 
 # Evaluation

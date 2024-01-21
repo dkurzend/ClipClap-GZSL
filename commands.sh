@@ -12,14 +12,14 @@
 nohup python3 main.py --cfg config/clipclap.yaml \
                         --device cuda:6 \
                         --root_dir /home/aoq234/akata-shared/aoq234/avzsl/clip_original/avgzsl_benchmark_datasets/UCF  \
-                        --log_dir /shared-network/aoq234/hip_gzsl_experiments/ClipClap_UCF_ablation_w_wavcaps \
+                        --log_dir /shared-network/aoq234/hip_gzsl_experiments/ClipClap_UCF \
                         --dataset_name UCF \
                         --epochs 20 \
                         --lr 0.00007 \
                         --use_wavcaps_embeddings True \
                         --modality both  \
-                        --word_embeddings wavcaps   \
-                        --run all > logs/ClipClap_UCF_ablation_w_wavcaps.log &
+                        --word_embeddings both   \
+                        --run all > logs/ClipClap_UCF.log &
 
 
 
@@ -61,14 +61,14 @@ python3 evaluate_clip.py --cfg config/clipclap.yaml \
 nohup python3 main.py --cfg config/clipclap.yaml \
                         --device cuda:6 \
                         --root_dir /home/aoq234/akata-shared/aoq234/avzsl/clip_original/avgzsl_benchmark_datasets/ActivityNet  \
-                        --log_dir /shared-network/aoq234/hip_gzsl_experiments/clipclap_activitynet_ablation_w_wavcaps \
+                        --log_dir /shared-network/aoq234/hip_gzsl_experiments/ClipClap_ActivityNet \
                         --dataset_name ActivityNet \
                         --epochs 15 \
                         --lr 0.0001 \
                         --use_wavcaps_embeddings True \
                         --modality both  \
-                        --word_embeddings wavcaps   \
-                        --run all > logs/clipclap_activitynet_ablation_w_wavcaps.log &
+                        --word_embeddings both   \
+                        --run all > logs/ClipClap_ActivityNet.log &
 
 
 
@@ -93,11 +93,11 @@ python3 evaluate_clip.py --cfg config/clipclap.yaml \
 nohup python3 main.py --cfg config/clipclap.yaml \
                         --device cuda:5 \
                         --root_dir /home/aoq234/akata-shared/aoq234/avzsl/clip_original/avgzsl_benchmark_datasets/VGGSound  \
-                        --log_dir /shared-network/aoq234/hip_gzsl_experiments/ClipClap_vggsound_linear_ablation_w_clip_new \
+                        --log_dir /shared-network/aoq234/hip_gzsl_experiments/ClipClap_VGGSound \
                         --dataset_name VGGSound \
                         --epochs 15 \
                         --lr 0.0001 \
                         --use_wavcaps_embeddings True \
                         --modality both  \
-                        --word_embeddings clip   \
-                        --run all > logs/ClipClap_vggsound_linear_ablation_w_clip_new.log &
+                        --word_embeddings both   \
+                        --run all > logs/ClipClap_VGGSound.log &
