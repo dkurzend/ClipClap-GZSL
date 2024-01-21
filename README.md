@@ -184,7 +184,7 @@ python3 clip_embeddings_extraction/get_clip_embeddings_vggsound.py
 ```WavCaps``` - Folder contains the code for the CLAP network. \
 ```clip_feature_extraction``` - Contains the code used to extract the CLIP/CLAP features from all 3 datasets. \
 ```clip_embeddings_extraction``` - Contains the code used to extract the CLIP and CLAP class embeddings from all 3 datasets. \
-```splitting_scripts_cls``` - Contains files from spltting our dataset into the required structure. \
+```splitting_scripts_cls``` - Contains files from spltting our dataset into the required structure.
 
 <!-- ## [Paper](https://arxiv.org/abs/2207.09966) | [Project Page](https://www.eml-unitue.de/publication/temporal-audio-visual-zsl)
 
