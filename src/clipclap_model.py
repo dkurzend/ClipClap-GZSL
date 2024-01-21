@@ -111,7 +111,7 @@ class EmbeddingNet(nn.Module):
 
 class ClipClap_model(nn.Module):
     def __init__(self, params_model, input_size_audio, input_size_video):
-        super(Clip_model, self).__init__()
+        super(ClipClap_model, self).__init__()
 
         print('Initializing model variables...', end='')
         # Dimension of embedding
