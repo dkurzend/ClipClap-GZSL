@@ -415,7 +415,7 @@ class ClipClap_model(nn.Module):
 
 
 
-       if self.modality == 'audio':
+        if self.modality == 'audio':
             w = w[:,512:]
             model_input = a
 
