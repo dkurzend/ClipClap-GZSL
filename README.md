@@ -1,4 +1,4 @@
-# Audio-Visual Generalized Zero-Shot Learning using Large Pre-Trained Models
+# Audio-Visual Generalized Zero-Shot Learning using Pre-Trained Large Multi-Modal Models
 
 
 
