@@ -1,6 +1,8 @@
 # Audio-Visual Generalized Zero-Shot Learning using Pre-Trained Large Multi-Modal Models
 
+## [Paper](https://arxiv.org/abs/2404.06309)
 
+This repository is the official implementation of [Audio-Visual Generalized Zero-Shot Learning using Pre-Trained Large Multi-Modal Models](https://arxiv.org/abs/2404.06309).
 
 <img src="audio_visual_gzsl_teaser.png" width="700" height="400">
 
