@@ -184,3 +184,19 @@ python3 clip_embeddings_extraction/get_clip_embeddings_vggsound.py
 ```clip_feature_extraction``` - Contains the code used to extract the CLIP/CLAP features from all 3 datasets. \
 ```clip_embeddings_extraction``` - Contains the code used to extract the CLIP and CLAP class embeddings from all 3 datasets. \
 ```splitting_scripts_cls``` - Contains files from spltting our dataset into the required structure.
+
+
+
+
+# References
+
+If you find this code useful, please consider citing:
+
+```
+@inproceedings{kurzendoerfer2024clipclap,
+  author    = {Kurzendörfer, David and Mercea, Otniel-Bogdan and Koepke, A. Sophia and Akata, Zeynep},
+  title     = {Audio-Visual Generalized Zero-Shot Learning using Pre-Trained Large Multi-Modal Models},
+  booktitle = {Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)},
+  year      = {2024}
+}
+```
